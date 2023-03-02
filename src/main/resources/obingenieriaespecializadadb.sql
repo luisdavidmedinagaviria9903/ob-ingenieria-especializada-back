@@ -4,27 +4,36 @@ create table component
         primary key,
     cmp_type          int(2)                           not null,
     cmp_eq            varchar(255)                     null,
-    id_client         int                              not null,
     cmp_creation_date datetime     default sysdate()   null,
     cmp_creation_user varchar(100) default 'Automatic' null,
+    cmp_status        int          default 0           null,
     constraint component_id_component_uindex
         unique (id_component)
 );
 
 create table component_entry
 (
-    id_component_entry        int auto_increment
+    id_component_entry    int auto_increment
         primary key,
-    cmp_entry_inventory_code  varchar(255) not null,
-    cmp_entry_inventory_value varchar(255) not null,
-    cmp_entry_observation     longtext     null,
-    id_component              int          not null,
-    constraint component_entry_cmp_entry_inventory_code_uindex
-        unique (cmp_entry_inventory_code),
+    cmp_entry_observation longtext null,
+    id_component          int      not null,
+    id_client             int      null,
     constraint component_entry_id_component_entry_uindex
         unique (id_component_entry),
     constraint component_entry_component_id_component_fk
         foreign key (id_component) references component (id_component)
+);
+
+create table component_entry_inventory
+(
+    id_component_entry_inventory int auto_increment
+        primary key,
+    id_cmp_entry                 int           not null,
+    cmp_entry_invrty_code        varchar(100)  not null,
+    cmp_entry_invrty_value       varchar(255)  null,
+    cmp_entry_invrty_status      int default 1 null,
+    constraint component_entry_inventory_id_component_entry_inventory_uindex
+        unique (id_component_entry_inventory)
 );
 
 create table component_evaluation
@@ -77,8 +86,16 @@ create table rol
 
 create table user
 (
-    id_user int auto_increment
+    id_user          int auto_increment
         primary key,
+    email            varchar(255) null,
+    user_first_name  varchar(255) null,
+    user_second_name varchar(255) null,
+    user_document    varchar(255) null,
+    document_type    int          null,
+    phone            int          null,
     constraint user_id_user_uindex
         unique (id_user)
 );
+
+
