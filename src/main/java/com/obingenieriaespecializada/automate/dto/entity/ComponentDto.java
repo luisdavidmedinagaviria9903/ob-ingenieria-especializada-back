@@ -1,4 +1,4 @@
-package com.obingenieriaespecializada.automate.dto;
+package com.obingenieriaespecializada.automate.dto.entity;
 
 import lombok.*;
 
@@ -16,7 +16,7 @@ public class ComponentDto implements Serializable {
     private Long id;
     private Integer type;
     private String eq;
-    private Integer idClient;
+    private Integer status;
     private LocalDateTime creationDate;
     private String creationUser;
 }

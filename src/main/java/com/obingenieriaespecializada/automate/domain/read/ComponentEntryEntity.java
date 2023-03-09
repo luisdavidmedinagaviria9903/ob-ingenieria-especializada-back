@@ -1,12 +1,12 @@
-package com.obingenieriaespecializada.automate.domain;
+package com.obingenieriaespecializada.automate.domain.read;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -34,11 +34,24 @@ public class ComponentEntryEntity {
     @Column(name = "cmp_entry_observation")
     private String observation;
 
-    @OneToOne(optional = true)
-    @NotFound(action = NotFoundAction.IGNORE)
+
+    @Column(name = "entry_date")
+    private LocalDateTime entryDate;
+
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
+
+    @OneToOne()
     @JoinColumn(name = "id_component", referencedColumnName = "id_component")
     private ComponentEntity component;
 
+    @Builder.Default
     @OneToMany(mappedBy = "idComponentEntry")
-    private Set<ComponentEntryInventoryEntity> inventory;
+    private Set<ComponentEntryInventoryEntity> inventory  = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "idComponentEntry")
+    private Set<ComponentEntryPicturesEntity> pictures = new HashSet<>();
+
+
 }

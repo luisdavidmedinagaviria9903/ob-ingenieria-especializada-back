@@ -1,4 +1,4 @@
-package com.obingenieriaespecializada.automate.domain;
+package com.obingenieriaespecializada.automate.domain.read;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,6 +41,10 @@ public class UserEntity implements Serializable {
 
     @Column(name = "phone")
     private Integer phone;
+
+    @OneToOne()
+    @JoinColumn(name = "rol_id", referencedColumnName = "id_rol")
+    private RolEntity rol;
 
     /*@Column(name = "user_name")
     private String userName;

@@ -1,9 +1,9 @@
 package com.obingenieriaespecializada.automate.repository;
 
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryEntity;
+import com.obingenieriaespecializada.automate.domain.read.ComponentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ComponentEntryRepository extends JpaRepository<ComponentEntryEntity, Long> {
+public interface ComponentRepository extends JpaRepository<ComponentEntity, Long> {
 }

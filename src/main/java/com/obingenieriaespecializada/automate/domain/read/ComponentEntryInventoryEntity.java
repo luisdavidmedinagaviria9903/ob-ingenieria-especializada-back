@@ -1,4 +1,4 @@
-package com.obingenieriaespecializada.automate.domain;
+package com.obingenieriaespecializada.automate.domain.read;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
