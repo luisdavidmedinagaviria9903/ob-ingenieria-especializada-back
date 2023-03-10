@@ -1,5 +1,6 @@
 package com.obingenieriaespecializada.automate.service.impl;
 
+import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import com.obingenieriaespecializada.automate.domain.read.ComponentEntryEntity;
 import com.obingenieriaespecializada.automate.domain.read.ComponentEntryInventoryEntity;
 import com.obingenieriaespecializada.automate.domain.read.ComponentEntryPicturesEntity;
@@ -60,8 +61,8 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
 
         if (!ObjectUtils.isEmpty(findAllEntryParams.getClientId())) {
             query = this.componentEntryRepository.findAllByClient_Id(findAllEntryParams.getClientId(), pageable);
-        } else if (!ObjectUtils.isEmpty(findAllEntryParams.getComponentStatusEnum())) {
-            query = this.componentEntryRepository.findAllByComponent_Status(findAllEntryParams.getComponentStatusEnum(), pageable);
+        } else if (!ObjectUtils.isEmpty(findAllEntryParams.getComponentStatus())) {
+            query = this.componentEntryRepository.findAllByComponent_Status(ComponentStatusEnum.getByIndex(findAllEntryParams.getComponentStatus()), pageable);
         } else {
             query = this.componentEntryRepository.findAll(pageable);
         }

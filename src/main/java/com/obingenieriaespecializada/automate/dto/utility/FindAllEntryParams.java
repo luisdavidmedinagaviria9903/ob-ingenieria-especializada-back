@@ -1,7 +1,6 @@
 package com.obingenieriaespecializada.automate.dto.utility;
 
 
-import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import lombok.*;
 
 @AllArgsConstructor
@@ -11,6 +10,6 @@ import lombok.*;
 @ToString
 public class FindAllEntryParams extends Pagination{
     private Long clientId;
-    private ComponentStatusEnum componentStatusEnum;
+    private Integer componentStatus;
 
 }
