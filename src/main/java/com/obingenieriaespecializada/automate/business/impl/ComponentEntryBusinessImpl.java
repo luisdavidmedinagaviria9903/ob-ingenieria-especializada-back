@@ -4,6 +4,7 @@ import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.service.ComponentEntryService;
 import com.obingenieriaespecializada.automate.service.ComponentService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +31,8 @@ public class ComponentEntryBusinessImpl implements ComponentEntryBusiness {
     }
 
     @Override
-    public Map<String, Object> findAll() {
-        return this.componentEntryService.findAll();
+    public Map<String, Object> findAll(FindAllEntryParams findAllEntryParams) {
+        return this.componentEntryService.findAll(findAllEntryParams);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ComponentEntryBusinessImpl implements ComponentEntryBusiness {
 
             componentEntry.getComponent().setEq(this.buildEq(componentEntry.getComponent().getType()));
             componentEntry.getComponent().setCreationDate(LocalDateTime.now());
-            componentEntry.getComponent().setStatus(ComponentStatusEnum.ENTRY.getIndex());
+            componentEntry.getComponent().setStatus(ComponentStatusEnum.ENTRY);
 
 
             Optional<ComponentDto> isComponentSaved = this.componentService.save(componentEntry.getComponent());

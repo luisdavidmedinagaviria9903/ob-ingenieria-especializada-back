@@ -1,6 +1,7 @@
 package com.obingenieriaespecializada.automate.domain.read;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class ComponentEntity {
     private String eq;
 
     @Column(name = "cmp_status")
-    private Integer status;
+    private ComponentStatusEnum status;
 
     @Column(name = "cmp_creation_date")
     private LocalDateTime creationDate;

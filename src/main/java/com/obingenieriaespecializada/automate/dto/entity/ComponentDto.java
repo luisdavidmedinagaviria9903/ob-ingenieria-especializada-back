@@ -1,5 +1,6 @@
 package com.obingenieriaespecializada.automate.dto.entity;
 
+import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import lombok.*;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class ComponentDto implements Serializable {
     private Long id;
     private String type;
     private String eq;
-    private Integer status;
+    private ComponentStatusEnum status;
     private LocalDateTime creationDate;
     private String creationUser;
 }

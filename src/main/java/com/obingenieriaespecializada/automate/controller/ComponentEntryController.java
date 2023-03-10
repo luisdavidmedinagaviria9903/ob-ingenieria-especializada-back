@@ -4,6 +4,7 @@ package com.obingenieriaespecializada.automate.controller;
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.business.GetComponentSpecsBusiness;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,9 @@ public class ComponentEntryController {
         this.getComponentSpecsBusiness = getComponentSpecsBusiness;
     }
 
-    @GetMapping("/findAll")
-    public ResponseEntity<Object> findAll(){
-        return new ResponseEntity<>(this.componentEntryBusiness.findAll(), HttpStatus.OK);
+    @PostMapping("/findAll")
+    public ResponseEntity<Object> findAll(@RequestBody FindAllEntryParams findAllEntryParams){
+        return new ResponseEntity<>(this.componentEntryBusiness.findAll(findAllEntryParams), HttpStatus.OK);
     }
 
     @PostMapping("/save")

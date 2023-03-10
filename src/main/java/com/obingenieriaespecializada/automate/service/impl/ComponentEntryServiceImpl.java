@@ -6,6 +6,7 @@ import com.obingenieriaespecializada.automate.domain.read.ComponentEntryPictures
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryInventoryDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryPicturesDto;
+import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.mapper.ComponentMapper;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryInventoryRepository;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryPicturesRepository;
@@ -39,13 +40,32 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
     }
 
     @Override
-    public Map<String, Object> findAll() {
+    public Map<String, Object> findAll(FindAllEntryParams findAllEntryParams) {
+
+        Optional<Sort> sorting;
+        Pageable pageable;
+        Page<ComponentEntryEntity> query;
 
         Map<String, Object> result = new HashMap<>();
 
-        Pageable pageable = PageRequest.of(0, 100, Sort.by("id").descending());
+        if (findAllEntryParams.getOrder().equals("asc")) {
+            sorting = Optional.of(Sort.by(findAllEntryParams.getSort()).ascending());
+        } else {
+            sorting = Optional.of(Sort.by(findAllEntryParams.getSort()).descending());
+        }
 
-        Page<ComponentEntryEntity> query = this.componentEntryRepository.findAll(pageable);
+        pageable = PageRequest.of(findAllEntryParams.getPage(), findAllEntryParams.getSize())
+                .withSort(sorting.orElseGet(() -> Sort.by(findAllEntryParams.getSort())));
+
+
+        if (!ObjectUtils.isEmpty(findAllEntryParams.getClientId())) {
+            query = this.componentEntryRepository.findAllByClient_Id(findAllEntryParams.getClientId(), pageable);
+        } else if (!ObjectUtils.isEmpty(findAllEntryParams.getComponentStatusEnum())) {
+            query = this.componentEntryRepository.findAllByComponent_Status(findAllEntryParams.getComponentStatusEnum(), pageable);
+        } else {
+            query = this.componentEntryRepository.findAll(pageable);
+        }
+
 
         if (!ObjectUtils.isEmpty(query)) {
             result.put("items", query.getContent());
@@ -74,7 +94,7 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
                 .stream()
                 .map(this.componentEntryMapper::convertTo).collect(Collectors.toSet());
 
-        return  !ObjectUtils.isEmpty(save) ? Optional.of(save) : Optional.empty();
+        return !ObjectUtils.isEmpty(save) ? Optional.of(save) : Optional.empty();
     }
 
     @Override
@@ -87,6 +107,6 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
                 .stream()
                 .map(this.componentEntryMapper::convertTo).collect(Collectors.toSet());
 
-        return  !ObjectUtils.isEmpty(save) ? Optional.of(save) : Optional.empty();
+        return !ObjectUtils.isEmpty(save) ? Optional.of(save) : Optional.empty();
     }
 }
