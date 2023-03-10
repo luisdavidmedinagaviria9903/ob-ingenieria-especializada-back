@@ -26,4 +26,10 @@ public class ComponentServiceImpl implements ComponentService {
         ComponentEntity save =  this.componentRepository.save(componentEntryMapper.convertTo(componentDto));
        return !ObjectUtils.isEmpty(save) ? Optional.of(componentEntryMapper.convertTo(save)) : Optional.empty();
     }
+
+    @Override
+    public Optional<ComponentDto> findFirstByEqEquals(String eq) {
+        ComponentEntity component = this.componentRepository.findFirstByEqEquals(eq);
+        return !ObjectUtils.isEmpty(component) ? Optional.ofNullable(componentEntryMapper.convertTo(component)) : Optional.empty();
+    }
 }

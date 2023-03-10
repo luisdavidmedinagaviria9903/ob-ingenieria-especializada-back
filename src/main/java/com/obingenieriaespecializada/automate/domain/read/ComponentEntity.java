@@ -24,7 +24,7 @@ public class ComponentEntity {
     private Long id;
 
     @Column(name = "cmp_type")
-    private Integer type;
+    private String type;
 
     @Column(name = "cmp_eq")
     private String eq;

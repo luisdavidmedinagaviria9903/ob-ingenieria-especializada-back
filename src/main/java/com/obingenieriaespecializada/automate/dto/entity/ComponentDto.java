@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ComponentDto implements Serializable {
     private static final long serialVersionUID = -1273307993058235109L;
     private Long id;
-    private Integer type;
+    private String type;
     private String eq;
     private Integer status;
     private LocalDateTime creationDate;
