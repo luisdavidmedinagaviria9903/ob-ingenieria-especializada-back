@@ -18,6 +18,8 @@ public class ComponentDto implements Serializable {
     private String type;
     private String eq;
     private ComponentStatusEnum status;
+
+    private ComponentEntryDto componentEntry;
     private LocalDateTime creationDate;
     private String creationUser;
 }

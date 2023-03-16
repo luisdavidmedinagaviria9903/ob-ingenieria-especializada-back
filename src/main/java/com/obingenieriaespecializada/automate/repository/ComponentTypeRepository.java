@@ -12,4 +12,6 @@ public interface ComponentTypeRepository extends JpaRepository<ComponentTypeEnti
 
     List<ComponentTypeEntity> findAllByStatus(Boolean status);
 
+    ComponentTypeEntity findByCode(String code);
+
 }

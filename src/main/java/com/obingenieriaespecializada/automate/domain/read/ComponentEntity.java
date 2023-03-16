@@ -39,4 +39,9 @@ public class ComponentEntity {
     @Column(name = "cmp_creation_user")
     private String creationUser;
 
+    @OneToOne()
+    @JoinColumn(name = "id_cmp_entry", referencedColumnName = "id_component_entry")
+    private ComponentEntryEntity componentEntry;
+
+
 }

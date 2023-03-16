@@ -12,4 +12,6 @@ public interface GetComponentSpecsService {
 
     List<ComponentEntryTypeSpecsDto> findAllByComponentType_Code(String code);
 
+    ComponentTypeDto findByCode(String code);
+
 }

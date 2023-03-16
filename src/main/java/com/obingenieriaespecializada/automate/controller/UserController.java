@@ -23,4 +23,5 @@ public class UserController {
     public ResponseEntity<Object> findAllClients(){
         return  new ResponseEntity<>( this.userBusiness.findAllUserByRol("CLIENT"), HttpStatus.OK);
     }
+
 }

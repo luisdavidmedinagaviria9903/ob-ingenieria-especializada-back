@@ -36,4 +36,7 @@ public class ComponentTypeEntity implements Serializable {
 
     @Column(name = "cmp_type_creation_date")
     private LocalDateTime creation_date;
+
+    @Column(name = "cmp_type_abbreviation")
+    private String abbreviation;
 }

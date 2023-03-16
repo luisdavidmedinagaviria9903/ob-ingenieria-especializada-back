@@ -21,7 +21,6 @@ public class ComponentEntryDto implements Serializable {
     private String observation;
     private LocalDateTime entryDate;
     private LocalDateTime creationDate;
-    private ComponentDto component;
     @Builder.Default
     private Set<ComponentEntryInventoryDto> inventory = new HashSet<>();
     @Builder.Default

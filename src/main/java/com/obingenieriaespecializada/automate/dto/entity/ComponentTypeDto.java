@@ -18,4 +18,6 @@ public class ComponentTypeDto {
     private String description;
     private Boolean status;
     private LocalDateTime creation_date;
+
+    private String abbreviation;
 }

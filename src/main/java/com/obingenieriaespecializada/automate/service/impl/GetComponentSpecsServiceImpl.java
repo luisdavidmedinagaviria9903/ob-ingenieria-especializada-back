@@ -43,4 +43,9 @@ public class GetComponentSpecsServiceImpl implements GetComponentSpecsService {
                 .stream().map(this.componentSpecsMapper::convertTo)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ComponentTypeDto findByCode(String code) {
+        return this.componentSpecsMapper.convertTo(this.componentTypeRepository.findByCode(code));
+    }
 }

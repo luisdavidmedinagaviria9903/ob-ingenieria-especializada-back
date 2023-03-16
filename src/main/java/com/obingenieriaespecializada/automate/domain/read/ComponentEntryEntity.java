@@ -41,9 +41,6 @@ public class ComponentEntryEntity {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @OneToOne()
-    @JoinColumn(name = "id_component", referencedColumnName = "id_component")
-    private ComponentEntity component;
 
     @Builder.Default
     @OneToMany(mappedBy = "idComponentEntry")

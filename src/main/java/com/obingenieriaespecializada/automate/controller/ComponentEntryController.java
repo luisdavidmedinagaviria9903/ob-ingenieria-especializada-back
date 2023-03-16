@@ -1,10 +1,7 @@
 package com.obingenieriaespecializada.automate.controller;
 
 
-import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.business.GetComponentSpecsBusiness;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
-import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,29 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/component-entry")
 @CrossOrigin(allowedHeaders = "*")
 public class ComponentEntryController {
-
-    private final ComponentEntryBusiness componentEntryBusiness;
     private final GetComponentSpecsBusiness getComponentSpecsBusiness;
 
-    public ComponentEntryController(ComponentEntryBusiness componentEntryBusiness,
-                                    GetComponentSpecsBusiness getComponentSpecsBusiness) {
-        this.componentEntryBusiness = componentEntryBusiness;
+    public ComponentEntryController(GetComponentSpecsBusiness getComponentSpecsBusiness) {
         this.getComponentSpecsBusiness = getComponentSpecsBusiness;
-    }
-
-    @PostMapping("/findAll")
-    public ResponseEntity<Object> findAll(@RequestBody FindAllEntryParams findAllEntryParams){
-        return new ResponseEntity<>(this.componentEntryBusiness.findAll(findAllEntryParams), HttpStatus.OK);
-    }
-
-    @PostMapping("/save")
-    public ResponseEntity<Object> saveEntry(@RequestBody ComponentEntryDto componentEntryDto){
-        return new ResponseEntity<>(this.componentEntryBusiness.save(componentEntryDto), HttpStatus.OK);
-    }
-
-    @GetMapping("/findAll/component/type")
-    public ResponseEntity<Object> findAllComponentType(){
-        return new ResponseEntity<>(this.getComponentSpecsBusiness.getAllComponentsType(), HttpStatus.OK);
     }
 
     @GetMapping("/findAll/specs/{spec}")
