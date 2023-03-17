@@ -3,7 +3,7 @@ package com.obingenieriaespecializada.automate.controller;
 
 import com.obingenieriaespecializada.automate.business.ComponentBusiness;
 import com.obingenieriaespecializada.automate.business.GetComponentSpecsBusiness;
-import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEntryDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class ComponentController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Object> saveEntry(@RequestBody WComponentEntryDto componentEntryDto){
+    public ResponseEntity<Object> saveEntry(@RequestBody RWComponentEntryDto componentEntryDto){
         return new ResponseEntity<>(this.componentBusiness.save(componentEntryDto), HttpStatus.OK);
     }
 

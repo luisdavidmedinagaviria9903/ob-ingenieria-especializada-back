@@ -1,13 +1,15 @@
 package com.obingenieriaespecializada.automate.business.impl;
 
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
-import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
+import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEntryDto;
 import com.obingenieriaespecializada.automate.service.ComponentEntryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,12 +25,12 @@ public class ComponentEntryBusinessImpl implements ComponentEntryBusiness {
 
 
     @Override
-    public Optional<WComponentEntryDto> save(WComponentEntryDto componentEntry) {
+    public Optional<RWComponentEntryDto> save(RWComponentEntryDto componentEntry) {
 
         try {
             componentEntry.setCreationDate(LocalDateTime.now());
 
-            Optional<WComponentEntryDto> isEntrySaved = this.componentEntryService.save(componentEntry);
+            Optional<RWComponentEntryDto> isEntrySaved = this.componentEntryService.save(componentEntry);
 
             if (isEntrySaved.isPresent() && !ObjectUtils.isEmpty(isEntrySaved.get().getId())) {
                 isEntrySaved.get().getInventory()
@@ -54,5 +56,10 @@ public class ComponentEntryBusinessImpl implements ComponentEntryBusiness {
 
 
         return Optional.empty();
+    }
+
+    @Override
+    public List<RWComponentEntryDto> findAllByComponentStatus(ComponentStatusEnum componentStatus) {
+        return this.componentEntryService.findAllByComponentStatus(componentStatus);
     }
 }

@@ -2,7 +2,6 @@ package com.obingenieriaespecializada.automate.domain.readwrite;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.obingenieriaespecializada.automate.domain.read.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WComponentEntryEntity {
+public class RWComponentEntryEntity {
 
     private static final long serialVersionUID = -5165583824741880724L;
 

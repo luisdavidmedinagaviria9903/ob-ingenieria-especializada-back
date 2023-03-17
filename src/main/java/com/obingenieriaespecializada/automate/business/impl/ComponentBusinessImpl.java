@@ -3,10 +3,9 @@ package com.obingenieriaespecializada.automate.business.impl;
 import com.obingenieriaespecializada.automate.business.ComponentBusiness;
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
-import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentTypeDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEntryDto;
 import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
-import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.service.ComponentService;
 import com.obingenieriaespecializada.automate.service.GetComponentSpecsService;
@@ -40,7 +39,7 @@ public class ComponentBusinessImpl implements ComponentBusiness {
     }
 
     @Override
-    public Optional<WComponentEntryDto> save(WComponentEntryDto componentEntryDto) {
+    public Optional<RWComponentEntryDto> save(RWComponentEntryDto componentEntryDto) {
         try {
             componentEntryDto.getComponent().setCreationDate(LocalDateTime.now());
             componentEntryDto.getComponent().setStatus(ComponentStatusEnum.ENTRY);
@@ -51,7 +50,7 @@ public class ComponentBusinessImpl implements ComponentBusiness {
                 componentEntryDto.setComponent(isComponentSaved.get());
                 componentEntryDto.setCreationDate(LocalDateTime.now());
 
-                Optional<WComponentEntryDto> componentEntrySaved = this.componentEntryBusiness.save(componentEntryDto);
+                Optional<RWComponentEntryDto> componentEntrySaved = this.componentEntryBusiness.save(componentEntryDto);
 
                 String buildEq = this.buildEq(componentEntryDto.getComponent().getType(), isComponentSaved.get().getId());
                 this.componentService.updateComponentEq(isComponentSaved.get().getId(), buildEq);

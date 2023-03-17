@@ -2,8 +2,6 @@ package com.obingenieriaespecializada.automate.dto.entity.readwrite;
 
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryInventoryDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryPicturesDto;
-import com.obingenieriaespecializada.automate.dto.entity.UserDto;
-import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
 import lombok.*;
 
 import java.io.Serializable;
@@ -17,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @ToString
-public class WComponentEntryDto implements Serializable {
+public class RWComponentEntryDto implements Serializable {
     private static final long serialVersionUID = -7628085908135157895L;
 
     private Long id;
