@@ -1,5 +1,8 @@
-package com.obingenieriaespecializada.automate.dto.entity;
+package com.obingenieriaespecializada.automate.dto.entity.read;
 
+import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryInventoryDto;
+import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryPicturesDto;
+import com.obingenieriaespecializada.automate.dto.entity.UserDto;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,14 +16,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @ToString
-public class ComponentEntryDto implements Serializable {
+public class RComponentEntryDto implements Serializable {
     private static final long serialVersionUID = -7628085908135157895L;
 
     private Long id;
-    private UserDto client;
+
     private String observation;
-    private LocalDateTime entryDate;
+
     private LocalDateTime creationDate;
+
+    private UserDto creationUser;
+
+    private RComponentDto component;
     @Builder.Default
     private Set<ComponentEntryInventoryDto> inventory = new HashSet<>();
     @Builder.Default

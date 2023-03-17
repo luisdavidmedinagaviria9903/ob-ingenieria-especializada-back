@@ -1,4 +1,4 @@
-package com.obingenieriaespecializada.automate.domain.read;
+package com.obingenieriaespecializada.automate.domain.readwrite;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentEntryInventorySpecsEntity implements Serializable {
+public class RWComponentEntryInventorySpecsEntity implements Serializable {
 
     private static final long serialVersionUID = 5428253546250339167L;
 

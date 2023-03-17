@@ -3,9 +3,10 @@ package com.obingenieriaespecializada.automate.business.impl;
 import com.obingenieriaespecializada.automate.business.ComponentBusiness;
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentDto;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentTypeDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.service.ComponentService;
 import com.obingenieriaespecializada.automate.service.GetComponentSpecsService;
@@ -39,23 +40,23 @@ public class ComponentBusinessImpl implements ComponentBusiness {
     }
 
     @Override
-    public Optional<ComponentDto> save(ComponentDto componentDto) {
+    public Optional<WComponentEntryDto> save(WComponentEntryDto componentEntryDto) {
         try {
-            Optional<ComponentEntryDto> componentEntrySaved = this.componentEntryBusiness.save(componentDto.getComponentEntry());
+            componentEntryDto.getComponent().setCreationDate(LocalDateTime.now());
+            componentEntryDto.getComponent().setStatus(ComponentStatusEnum.ENTRY);
+            Optional<WComponentDto> isComponentSaved = this.componentService.save(componentEntryDto.getComponent());
 
-            if (componentEntrySaved.isPresent() && !ObjectUtils.isEmpty(componentEntrySaved.get().getId())) {
-                componentDto.setCreationDate(LocalDateTime.now());
-                componentDto.setStatus(ComponentStatusEnum.ENTRY);
-                componentDto.setComponentEntry(componentEntrySaved.get());
+            if (isComponentSaved.isPresent() && !ObjectUtils.isEmpty(isComponentSaved.get().getId())) {
 
-                Optional<ComponentDto> isComponentSaved = this.componentService.save(componentDto);
+                componentEntryDto.setComponent(isComponentSaved.get());
+                componentEntryDto.setCreationDate(LocalDateTime.now());
 
-                if (isComponentSaved.isPresent() && !ObjectUtils.isEmpty(isComponentSaved.get().getId())){
-                    String buildEq = this.buildEq(componentDto.getType(), isComponentSaved.get().getId());
-                    this.componentService.updateComponentEq(isComponentSaved.get().getId(), buildEq);
-                }
+                Optional<WComponentEntryDto> componentEntrySaved = this.componentEntryBusiness.save(componentEntryDto);
 
-                return isComponentSaved;
+                String buildEq = this.buildEq(componentEntryDto.getComponent().getType(), isComponentSaved.get().getId());
+                this.componentService.updateComponentEq(isComponentSaved.get().getId(), buildEq);
+
+                return componentEntrySaved;
             }
         } catch (Exception e) {
             log.error("ERROR when saving component entry" + e.getMessage() + e.getCause());

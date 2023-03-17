@@ -1,6 +1,7 @@
-package com.obingenieriaespecializada.automate.dto.entity;
+package com.obingenieriaespecializada.automate.dto.entity.readwrite;
 
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
+import com.obingenieriaespecializada.automate.dto.entity.UserDto;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,14 +13,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Setter
 @ToString
-public class ComponentDto implements Serializable {
+public class WComponentDto implements Serializable {
     private static final long serialVersionUID = -1273307993058235109L;
     private Long id;
     private String type;
     private String eq;
     private ComponentStatusEnum status;
 
-    private ComponentEntryDto componentEntry;
+    private Integer client;
+
+    private LocalDateTime entryDate;
+
     private LocalDateTime creationDate;
-    private String creationUser;
 }

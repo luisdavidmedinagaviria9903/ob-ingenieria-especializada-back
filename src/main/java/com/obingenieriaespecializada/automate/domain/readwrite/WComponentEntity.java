@@ -1,7 +1,8 @@
-package com.obingenieriaespecializada.automate.domain.read;
+package com.obingenieriaespecializada.automate.domain.readwrite;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
+import com.obingenieriaespecializada.automate.domain.read.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentEntity {
+public class WComponentEntity {
     private static final long serialVersionUID = -5165583824741880724L;
 
     @Id
@@ -33,15 +34,16 @@ public class ComponentEntity {
     @Column(name = "cmp_status")
     private ComponentStatusEnum status;
 
+
+    @Column(name = "id_client")
+    private Integer client;
+
+    @Column(name = "cmp_entry_date")
+    private LocalDateTime entryDate;
+
     @Column(name = "cmp_creation_date")
     private LocalDateTime creationDate;
 
-    @Column(name = "cmp_creation_user")
-    private String creationUser;
-
-    @OneToOne()
-    @JoinColumn(name = "id_cmp_entry", referencedColumnName = "id_component_entry")
-    private ComponentEntryEntity componentEntry;
 
 
 }

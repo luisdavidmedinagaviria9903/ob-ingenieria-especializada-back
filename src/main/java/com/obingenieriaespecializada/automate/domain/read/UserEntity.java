@@ -2,6 +2,7 @@ package com.obingenieriaespecializada.automate.domain.read;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.obingenieriaespecializada.automate.domain.read.RolEntity;
 import lombok.*;
 
 import javax.persistence.*;

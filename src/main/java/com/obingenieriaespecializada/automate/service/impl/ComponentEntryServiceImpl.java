@@ -1,11 +1,11 @@
 package com.obingenieriaespecializada.automate.service.impl;
 
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryEntity;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryInventoryEntity;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryPicturesEntity;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.domain.readwrite.RWComponentEntryPicturesEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.WComponentEntryEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.RWComponentEntryInventoryEntity;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryInventoryDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryPicturesDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
 import com.obingenieriaespecializada.automate.mapper.ComponentMapper;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryInventoryRepository;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryPicturesRepository;
@@ -37,15 +37,15 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
 
 
     @Override
-    public Optional<ComponentEntryDto> save(ComponentEntryDto componentEntry) {
-        ComponentEntryEntity save = this.componentEntryRepository.saveAndFlush(this.componentEntryMapper.convertTo(componentEntry));
+    public Optional<WComponentEntryDto> save(WComponentEntryDto componentEntry) {
+        WComponentEntryEntity save = this.componentEntryRepository.saveAndFlush(this.componentEntryMapper.convertTo(componentEntry));
         return !ObjectUtils.isEmpty(save) ? Optional.of(this.componentEntryMapper.convertTo(save)) : Optional.empty();
     }
 
     @Override
     public Optional<Set<ComponentEntryInventoryDto>> saveAllInventory(Set<ComponentEntryInventoryDto> componentEntryInventory) {
 
-        Set<ComponentEntryInventoryEntity> mapAll = componentEntryInventory.stream()
+        Set<RWComponentEntryInventoryEntity> mapAll = componentEntryInventory.stream()
                 .map(this.componentEntryMapper::convertTo)
                 .collect(Collectors.toSet());
 
@@ -58,7 +58,7 @@ public class ComponentEntryServiceImpl implements ComponentEntryService {
 
     @Override
     public Optional<Set<ComponentEntryPicturesDto>> saveAllPictures(Set<ComponentEntryPicturesDto> componentEntryPictures) {
-        Set<ComponentEntryPicturesEntity> mapAll = componentEntryPictures.stream()
+        Set<RWComponentEntryPicturesEntity> mapAll = componentEntryPictures.stream()
                 .map(this.componentEntryMapper::convertTo)
                 .collect(Collectors.toSet());
 

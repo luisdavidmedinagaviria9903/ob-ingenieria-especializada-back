@@ -4,6 +4,7 @@ package com.obingenieriaespecializada.automate.dto.entity;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Builder
@@ -20,4 +21,6 @@ public class ComponentEntryInventoryDto  implements Serializable {
     private String code;
     private String value;
     private Integer status;
+
+    private LocalDateTime creationDate;
 }

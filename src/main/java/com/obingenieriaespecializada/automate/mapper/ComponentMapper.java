@@ -1,29 +1,35 @@
 package com.obingenieriaespecializada.automate.mapper;
 
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntity;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryEntity;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryInventoryEntity;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntryPicturesEntity;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentDto;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.domain.read.RComponentEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.WComponentEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.WComponentEntryEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.RWComponentEntryInventoryEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.RWComponentEntryPicturesEntity;
+import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryInventoryDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryPicturesDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ComponentMapper {
 
-    ComponentDto convertTo(ComponentEntity component);
-    ComponentEntity convertTo(ComponentDto component);
+    RComponentDto convertTo(RComponentEntity component);
 
-    ComponentEntryDto convertTo(ComponentEntryEntity componentEntry);
-    ComponentEntryEntity convertTo(ComponentEntryDto componentEntry);
+    RComponentEntity convertTo(RComponentDto component);
+    WComponentEntity convertTo(WComponentDto component);
 
-    ComponentEntryInventoryDto convertTo(ComponentEntryInventoryEntity componentEntryInventory);
-    ComponentEntryInventoryEntity convertTo(ComponentEntryInventoryDto componentEntryInventory);
+    WComponentDto convertTo(WComponentEntity component);
 
-    ComponentEntryPicturesDto convertTo(ComponentEntryPicturesEntity componentEntryPictures);
-    ComponentEntryPicturesEntity convertTo(ComponentEntryPicturesDto componentEntryPictures);
+    WComponentEntryDto convertTo(WComponentEntryEntity componentEntry);
+    WComponentEntryEntity convertTo(WComponentEntryDto componentEntry);
+
+    ComponentEntryInventoryDto convertTo(RWComponentEntryInventoryEntity componentEntryInventory);
+    RWComponentEntryInventoryEntity convertTo(ComponentEntryInventoryDto componentEntryInventory);
+
+    ComponentEntryPicturesDto convertTo(RWComponentEntryPicturesEntity componentEntryPictures);
+    RWComponentEntryPicturesEntity convertTo(ComponentEntryPicturesDto componentEntryPictures);
 
 
 }

@@ -1,7 +1,7 @@
 package com.obingenieriaespecializada.automate.business.impl;
 
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentEntryDto;
 import com.obingenieriaespecializada.automate.service.ComponentEntryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,12 @@ public class ComponentEntryBusinessImpl implements ComponentEntryBusiness {
 
 
     @Override
-    public Optional<ComponentEntryDto> save(ComponentEntryDto componentEntry) {
+    public Optional<WComponentEntryDto> save(WComponentEntryDto componentEntry) {
 
         try {
             componentEntry.setCreationDate(LocalDateTime.now());
 
-            Optional<ComponentEntryDto> isEntrySaved = this.componentEntryService.save(componentEntry);
+            Optional<WComponentEntryDto> isEntrySaved = this.componentEntryService.save(componentEntry);
 
             if (isEntrySaved.isPresent() && !ObjectUtils.isEmpty(isEntrySaved.get().getId())) {
                 isEntrySaved.get().getInventory()

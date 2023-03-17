@@ -1,4 +1,4 @@
-package com.obingenieriaespecializada.automate.domain.read;
+package com.obingenieriaespecializada.automate.domain.readwrite;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentEntryPicturesEntity {
+public class RWComponentEntryPicturesEntity {
 
     private static final long serialVersionUID = -5165583824741880724L;
 

@@ -1,11 +1,14 @@
 package com.obingenieriaespecializada.automate.service.impl;
 
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
-import com.obingenieriaespecializada.automate.domain.read.ComponentEntity;
-import com.obingenieriaespecializada.automate.dto.entity.ComponentDto;
+import com.obingenieriaespecializada.automate.domain.read.RComponentEntity;
+import com.obingenieriaespecializada.automate.domain.readwrite.WComponentEntity;
+import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.mapper.ComponentMapper;
-import com.obingenieriaespecializada.automate.repository.ComponentRepository;
+import com.obingenieriaespecializada.automate.repository.RComponentRepository;
+import com.obingenieriaespecializada.automate.repository.WComponentRepository;
 import com.obingenieriaespecializada.automate.service.ComponentService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
@@ -22,31 +25,29 @@ import java.util.Optional;
 @Service
 public class ComponentServiceImpl implements ComponentService {
 
-    private final ComponentRepository componentRepository;
+    private final RComponentRepository rComponentRepository;
+    private final WComponentRepository wComponentRepository;
     private final ComponentMapper componentEntryMapper = Mappers.getMapper(ComponentMapper.class);
 
-    public ComponentServiceImpl(ComponentRepository componentRepository) {
-        this.componentRepository = componentRepository;
+    public ComponentServiceImpl(RComponentRepository rComponentRepository, WComponentRepository wComponentRepository) {
+        this.rComponentRepository = rComponentRepository;
+        this.wComponentRepository = wComponentRepository;
     }
 
+
     @Override
-    public Optional<ComponentDto> save(ComponentDto componentDto) {
-        ComponentEntity save =  this.componentRepository.save(componentEntryMapper.convertTo(componentDto));
+    public Optional<WComponentDto> save(WComponentDto RComponentDto) {
+        WComponentEntity save =  this.wComponentRepository.save(componentEntryMapper.convertTo(RComponentDto));
        return !ObjectUtils.isEmpty(save) ? Optional.of(componentEntryMapper.convertTo(save)) : Optional.empty();
     }
 
-    @Override
-    public Optional<ComponentDto> findFirstByEqEquals(String eq) {
-        ComponentEntity component = this.componentRepository.findFirstByEqEquals(eq);
-        return !ObjectUtils.isEmpty(component) ? Optional.ofNullable(componentEntryMapper.convertTo(component)) : Optional.empty();
-    }
 
     @Override
     public void updateComponentEq(Long componentId, String eq) {
-        Optional<ComponentEntity> findComponent = this.componentRepository.findById(componentId);
+        Optional<WComponentEntity> findComponent = this.wComponentRepository.findById(componentId);
         if (findComponent.isPresent()){
             findComponent.get().setEq(eq);
-            this.componentRepository.saveAndFlush(findComponent.get());
+            this.wComponentRepository.saveAndFlush(findComponent.get());
         }
     }
 
@@ -55,7 +56,7 @@ public class ComponentServiceImpl implements ComponentService {
 
         Optional<Sort> sorting;
         Pageable pageable;
-        Page<ComponentEntity> query;
+        Page<RComponentEntity> query;
 
         Map<String, Object> result = new HashMap<>();
 
@@ -70,11 +71,11 @@ public class ComponentServiceImpl implements ComponentService {
 
 
         if (!ObjectUtils.isEmpty(findAllEntryParams.getClientId())) {
-            query = this.componentRepository.findAllByComponentEntry_Client_Id(findAllEntryParams.getClientId(), pageable);
+            query = this.rComponentRepository.findAllByClient_Id(findAllEntryParams.getClientId(), pageable);
         } else if (!ObjectUtils.isEmpty(findAllEntryParams.getComponentStatus())) {
-            query = this.componentRepository.findAllByStatus(ComponentStatusEnum.getByIndex(findAllEntryParams.getComponentStatus()), pageable);
+            query = this.rComponentRepository.findAllByStatus(ComponentStatusEnum.getByIndex(findAllEntryParams.getComponentStatus()), pageable);
         } else {
-            query = this.componentRepository.findAll(pageable);
+            query = this.rComponentRepository.findAll(pageable);
         }
 
 

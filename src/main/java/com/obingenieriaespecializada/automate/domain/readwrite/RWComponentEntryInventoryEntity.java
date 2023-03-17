@@ -1,10 +1,11 @@
-package com.obingenieriaespecializada.automate.domain.read;
+package com.obingenieriaespecializada.automate.domain.readwrite;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "component_entry_inventory")
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentEntryInventoryEntity {
+public class RWComponentEntryInventoryEntity {
 
     private static final long serialVersionUID = -5165583824741880724L;
 
@@ -35,5 +36,8 @@ public class ComponentEntryInventoryEntity {
 
     @Column(name = "cmp_entry_invrty_status")
     private Integer status;
+
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
 }

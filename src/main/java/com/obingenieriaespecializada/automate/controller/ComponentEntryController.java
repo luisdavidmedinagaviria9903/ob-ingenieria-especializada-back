@@ -21,4 +21,6 @@ public class ComponentEntryController {
         return new ResponseEntity<>(this.getComponentSpecsBusiness.findAllByComponentType_Code(spec), HttpStatus.OK);
     }
 
+
+
 }

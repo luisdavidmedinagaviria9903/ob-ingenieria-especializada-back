@@ -1,7 +1,8 @@
-package com.obingenieriaespecializada.automate.domain.read;
+package com.obingenieriaespecializada.automate.domain.readwrite;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.obingenieriaespecializada.automate.domain.read.ComponentTypeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentEntryTypeSpecsEntity implements Serializable {
+public class RWComponentEntryTypeSpecsEntity implements Serializable {
 
     private static final long serialVersionUID = 7046031291432408481L;
 
@@ -32,7 +33,7 @@ public class ComponentEntryTypeSpecsEntity implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "cmp_spec_code", referencedColumnName = "cmp_entry_specs_code")
-    private ComponentEntryInventorySpecsEntity componentSpec;
+    private RWComponentEntryInventorySpecsEntity componentSpec;
 
     @Column(name = "cmp_entry_spec_required")
     private Boolean required;
