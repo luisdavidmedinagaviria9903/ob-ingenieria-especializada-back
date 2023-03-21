@@ -40,7 +40,7 @@ public class RWComponentEntryEntity {
 
     @OneToOne()
     @JoinColumn(name = "id_component", referencedColumnName = "id_component")
-    private WComponentEntity component;
+    private RWComponentEntity component;
 
     @Builder.Default
     @OneToMany(mappedBy = "idComponentEntry")

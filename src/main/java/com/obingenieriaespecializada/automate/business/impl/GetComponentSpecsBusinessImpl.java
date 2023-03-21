@@ -3,6 +3,7 @@ package com.obingenieriaespecializada.automate.business.impl;
 import com.obingenieriaespecializada.automate.business.GetComponentSpecsBusiness;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryTypeSpecsDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentTypeDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEvaluationInventorySpecsDto;
 import com.obingenieriaespecializada.automate.service.GetComponentSpecsService;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,10 @@ public class GetComponentSpecsBusinessImpl implements GetComponentSpecsBusiness 
     @Override
     public List<ComponentEntryTypeSpecsDto> findAllByComponentType_Code(String code) {
         return this.componentSpecsService.findAllByComponentType_Code(code);
+    }
+
+    @Override
+    public List<RWComponentEvaluationInventorySpecsDto> findAllComponentEvaluationSpecs() {
+        return this.componentSpecsService.findAllComponentEvaluationSpecs();
     }
 }

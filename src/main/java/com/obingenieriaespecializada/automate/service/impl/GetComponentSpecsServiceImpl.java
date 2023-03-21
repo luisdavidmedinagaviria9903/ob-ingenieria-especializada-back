@@ -2,9 +2,11 @@ package com.obingenieriaespecializada.automate.service.impl;
 
 import com.obingenieriaespecializada.automate.dto.entity.ComponentEntryTypeSpecsDto;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentTypeDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEvaluationInventorySpecsDto;
 import com.obingenieriaespecializada.automate.mapper.ComponentSpecsMapper;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryInventorySpecsRepository;
 import com.obingenieriaespecializada.automate.repository.ComponentEntryTypeSpecsRepository;
+import com.obingenieriaespecializada.automate.repository.ComponentEvaluationInventorySpecsRepository;
 import com.obingenieriaespecializada.automate.repository.ComponentTypeRepository;
 import com.obingenieriaespecializada.automate.service.GetComponentSpecsService;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,18 @@ import java.util.stream.Collectors;
 public class GetComponentSpecsServiceImpl implements GetComponentSpecsService {
 
     private final ComponentTypeRepository componentTypeRepository;
-    private final ComponentEntryInventorySpecsRepository componentEntryInventorySpecsRepository;
     private final ComponentEntryTypeSpecsRepository componentEntryTypeSpecsRepository;
+
+    private final ComponentEvaluationInventorySpecsRepository componentEvaluationInventorySpecsRepository;
     private final ComponentSpecsMapper componentSpecsMapper;
 
     public GetComponentSpecsServiceImpl(ComponentTypeRepository componentTypeRepository,
-                                        ComponentEntryInventorySpecsRepository componentEntryInventorySpecsRepository,
                                         ComponentEntryTypeSpecsRepository componentEntryTypeSpecsRepository,
+                                        ComponentEvaluationInventorySpecsRepository componentEvaluationInventorySpecsRepository,
                                         ComponentSpecsMapper componentSpecsMapper) {
         this.componentTypeRepository = componentTypeRepository;
-        this.componentEntryInventorySpecsRepository = componentEntryInventorySpecsRepository;
         this.componentEntryTypeSpecsRepository = componentEntryTypeSpecsRepository;
+        this.componentEvaluationInventorySpecsRepository = componentEvaluationInventorySpecsRepository;
         this.componentSpecsMapper = componentSpecsMapper;
     }
 
@@ -47,5 +50,13 @@ public class GetComponentSpecsServiceImpl implements GetComponentSpecsService {
     @Override
     public ComponentTypeDto findByCode(String code) {
         return this.componentSpecsMapper.convertTo(this.componentTypeRepository.findByCode(code));
+    }
+
+    @Override
+    public List<RWComponentEvaluationInventorySpecsDto> findAllComponentEvaluationSpecs() {
+        return this.componentEvaluationInventorySpecsRepository.findAllByStatus(1)
+                .stream()
+                .map(this.componentSpecsMapper::convertTo)
+                .collect(Collectors.toList());
     }
 }

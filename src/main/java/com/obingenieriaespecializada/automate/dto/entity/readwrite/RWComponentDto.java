@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Setter
 @ToString
-public class WComponentDto implements Serializable {
+public class RWComponentDto implements Serializable {
     private static final long serialVersionUID = -1273307993058235109L;
     private Long id;
     private String type;
     private String eq;
     private ComponentStatusEnum status;
 
-    private Integer client;
+    private UserDto client;
 
     private LocalDateTime entryDate;
 

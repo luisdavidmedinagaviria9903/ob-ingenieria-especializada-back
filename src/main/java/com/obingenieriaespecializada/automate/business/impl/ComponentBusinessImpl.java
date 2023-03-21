@@ -4,8 +4,8 @@ import com.obingenieriaespecializada.automate.business.ComponentBusiness;
 import com.obingenieriaespecializada.automate.business.ComponentEntryBusiness;
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import com.obingenieriaespecializada.automate.dto.entity.ComponentTypeDto;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentDto;
 import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentEntryDto;
-import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.service.ComponentService;
 import com.obingenieriaespecializada.automate.service.GetComponentSpecsService;
@@ -43,7 +43,7 @@ public class ComponentBusinessImpl implements ComponentBusiness {
         try {
             componentEntryDto.getComponent().setCreationDate(LocalDateTime.now());
             componentEntryDto.getComponent().setStatus(ComponentStatusEnum.ENTRY);
-            Optional<WComponentDto> isComponentSaved = this.componentService.save(componentEntryDto.getComponent());
+            Optional<RWComponentDto> isComponentSaved = this.componentService.save(componentEntryDto.getComponent());
 
             if (isComponentSaved.isPresent() && !ObjectUtils.isEmpty(isComponentSaved.get().getId())) {
 

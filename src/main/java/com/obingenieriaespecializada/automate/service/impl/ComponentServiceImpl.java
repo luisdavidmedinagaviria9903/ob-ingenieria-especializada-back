@@ -2,9 +2,8 @@ package com.obingenieriaespecializada.automate.service.impl;
 
 import com.obingenieriaespecializada.automate.domain.enums.ComponentStatusEnum;
 import com.obingenieriaespecializada.automate.domain.read.RComponentEntity;
-import com.obingenieriaespecializada.automate.domain.readwrite.WComponentEntity;
-import com.obingenieriaespecializada.automate.dto.entity.read.RComponentDto;
-import com.obingenieriaespecializada.automate.dto.entity.readwrite.WComponentDto;
+import com.obingenieriaespecializada.automate.domain.readwrite.RWComponentEntity;
+import com.obingenieriaespecializada.automate.dto.entity.readwrite.RWComponentDto;
 import com.obingenieriaespecializada.automate.dto.utility.FindAllEntryParams;
 import com.obingenieriaespecializada.automate.mapper.ComponentMapper;
 import com.obingenieriaespecializada.automate.repository.RComponentRepository;
@@ -36,15 +35,15 @@ public class ComponentServiceImpl implements ComponentService {
 
 
     @Override
-    public Optional<WComponentDto> save(WComponentDto RComponentDto) {
-        WComponentEntity save =  this.wComponentRepository.save(componentEntryMapper.convertTo(RComponentDto));
+    public Optional<RWComponentDto> save(RWComponentDto RComponentDto) {
+        RWComponentEntity save =  this.wComponentRepository.save(componentEntryMapper.convertTo(RComponentDto));
        return !ObjectUtils.isEmpty(save) ? Optional.of(componentEntryMapper.convertTo(save)) : Optional.empty();
     }
 
 
     @Override
     public void updateComponentEq(Long componentId, String eq) {
-        Optional<WComponentEntity> findComponent = this.wComponentRepository.findById(componentId);
+        Optional<RWComponentEntity> findComponent = this.wComponentRepository.findById(componentId);
         if (findComponent.isPresent()){
             findComponent.get().setEq(eq);
             this.wComponentRepository.saveAndFlush(findComponent.get());

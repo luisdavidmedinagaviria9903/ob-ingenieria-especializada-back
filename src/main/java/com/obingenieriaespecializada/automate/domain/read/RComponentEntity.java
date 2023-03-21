@@ -43,9 +43,17 @@ public class RComponentEntity {
     @Column(name = "cmp_creation_date")
     private LocalDateTime creationDate;
 
-    @OneToOne
+
+    @OneToOne()
+    @JoinColumn(name = "id_component", referencedColumnName = "component")
+    private RComponentEvaluationEntity componentEvaluation;
+    @OneToOne()
     @JoinColumn(name = "id_component", referencedColumnName = "id_component")
     private RComponentEntryEntity componentEntry;
+
+
+
+
 
 
 

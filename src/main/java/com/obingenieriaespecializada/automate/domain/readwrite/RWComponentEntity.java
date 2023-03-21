@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WComponentEntity {
+public class RWComponentEntity {
     private static final long serialVersionUID = -5165583824741880724L;
 
     @Id
@@ -35,8 +35,9 @@ public class WComponentEntity {
     private ComponentStatusEnum status;
 
 
-    @Column(name = "id_client")
-    private Integer client;
+    @OneToOne()
+    @JoinColumn(name = "id_client", referencedColumnName = "id_user")
+    private UserEntity client;
 
     @Column(name = "cmp_entry_date")
     private LocalDateTime entryDate;
